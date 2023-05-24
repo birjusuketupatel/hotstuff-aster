@@ -19,6 +19,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/salticidae/cmake/Modules/")
 
+include_directories(${OPENSSL_INCLUDE_DIR})
+
 add_subdirectory(salticidae)
 include_directories(salticidae/include)
 
@@ -61,11 +63,11 @@ if(BUILD_SHARED)
     set_property(TARGET hotstuff PROPERTY POSITION_INDEPENDENT_CODE 1)
     add_library(hotstuff_shared SHARED $<TARGET_OBJECTS:hotstuff>)
     set_target_properties(hotstuff_shared PROPERTIES OUTPUT_NAME "hotstuff")
-    target_link_libraries(hotstuff_shared salticidae_static secp256k1 crypto ${CMAKE_THREAD_LIBS_INIT})
+    target_link_libraries(hotstuff_shared salticidae_static secp256k1 crypto ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY})
 endif()
 add_library(hotstuff_static STATIC $<TARGET_OBJECTS:hotstuff>)
 set_target_properties(hotstuff_static PROPERTIES OUTPUT_NAME "hotstuff")
-target_link_libraries(hotstuff_static salticidae_static secp256k1 crypto ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(hotstuff_static salticidae_static secp256k1 crypto ${CMAKE_THREAD_LIBS_INIT} ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY})
 
 add_subdirectory(test)
 
@@ -91,11 +93,11 @@ endif()
 # build tools
 add_executable(hotstuff-keygen
     src/hotstuff_keygen.cpp)
-target_link_libraries(hotstuff-keygen hotstuff_static)
+target_link_libraries(hotstuff-keygen hotstuff_static ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY})
 
 add_executable(hotstuff-tls-keygen
     src/hotstuff_tls_keygen.cpp)
-target_link_libraries(hotstuff-tls-keygen hotstuff_static)
+target_link_libraries(hotstuff-tls-keygen hotstuff_static ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY})
 
 find_package(Doxygen)
 if (DOXYGEN_FOUND)

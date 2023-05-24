@@ -83,7 +83,7 @@ section may be incomplete and subject to changes.
     #
     # on Ubuntu: sudo apt-get install libssl-dev libuv1-dev cmake make
 
-    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED=ON -DHOTSTUFF_PROTO_LOG=ON
+    cmake3 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED=ON -DHOTSTUFF_PROTO_LOG=ON -DOPENSSL_ROOT_DIR=/usr/lib64 -DOPENSSL_INCLUDE_DIR=/usr/include/openssl11 -DOPENSSL_LIBRARIES=/usr/lib64/openssl
     make
 
     # start 4 demo replicas with scripts/run_demo.sh

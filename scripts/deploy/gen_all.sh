@@ -6,6 +6,6 @@
 # One IP can appear one or more times in the text files. If the same IP appears
 # several times, it runs multiple replica/client processes at the same time.
 
-python3 ./gen_inventory.py --prefix 'hotstuff.gen' > nodes.ini
+python3.6 ./gen_inventory.py --prefix 'hotstuff.gen' > nodes.ini
 awk '{print $2}' replicas.txt > replicas_inter.txt
-python3 ../gen_conf.py --ips replicas_inter.txt --iter 1 --prefix 'hotstuff.gen' --keygen ../../hotstuff-keygen --tls-keygen ../../hotstuff-tls-keygen --block-size 400
+python3.6 ../gen_conf.py --ips replicas_inter.txt --iter 1 --prefix 'hotstuff.gen' --keygen ../../hotstuff-keygen --tls-keygen ../../hotstuff-tls-keygen --block-size 400
