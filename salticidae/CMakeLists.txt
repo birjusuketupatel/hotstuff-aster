@@ -29,8 +29,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(Libuv 1.10.0 REQUIRED)
 find_package(OpenSSL 1.1.0 REQUIRED)
 
-include_directories(${OPENSSL_INCLUDE_DIR})
-
 include_directories(include)
 add_library(salticidae
     OBJECT
